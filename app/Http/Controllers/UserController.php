@@ -90,7 +90,7 @@ class UserController extends Controller
 
     public function scores()
     {
-        $users = User::orderBy('score', 'DESC')->get();
+        $users = User::all()->sortByDesc('score');
         return response()->json([
             'users' => $users
         ]);
