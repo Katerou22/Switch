@@ -15,6 +15,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->post('score', 'UserController@score');
     });
 
+    $router->get('scores', 'UserController@scores');
 
 
 });

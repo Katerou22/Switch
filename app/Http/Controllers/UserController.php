@@ -87,4 +87,12 @@ class UserController extends Controller
         ]);
 
     }
+
+    public function scores()
+    {
+        $users = User::orderBy('score', 'DESC')->get();
+        return response()->json([
+            'users' => $users
+        ]);
+    }
 }
