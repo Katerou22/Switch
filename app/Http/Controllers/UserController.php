@@ -82,7 +82,7 @@ class UserController extends Controller
 
     public function score(Request $request)
     {
-        $user = auth()->user();
+        $user = auth()->guard('api')->user();
         if ($user === null) {
             return response()->json([
                 'message' => 'User Not Found'
