@@ -82,7 +82,7 @@ class UserController extends Controller
 
     public function score(Request $request)
     {
-//        dd($request->user('api'));
+        dd($request->user('api'));
         $user = auth()->guard('api')->user();
         dd($user);
 //        if ($user === null) {
