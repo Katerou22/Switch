@@ -43,9 +43,9 @@ class UserController extends Controller
 
         $user = User::where('username', $request->username)->first();
 
-        if ($user !== null) {
+        if ($user === null) {
             return response()->json([
-                'message' => 'User Exists'
+                'message' => 'User not found'
             ], 400);
         }
 
@@ -82,7 +82,7 @@ class UserController extends Controller
 
     public function score(Request $request)
     {
-        $user = auth()->guard('api')->user();
+        $user = auth()->user();
         if ($user === null) {
             return response()->json([
                 'message' => 'User Not Found'
