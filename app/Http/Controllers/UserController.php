@@ -13,9 +13,7 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
-        $request->validate([
-            'username' => 'required'
-        ]);
+
 
 
         $user = User::where('username', $request->username)->first();
@@ -42,10 +40,6 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate([
-            'username' => 'required',
-            'password' => 'required',
-        ]);
 
 
         $user = User::where('username', $request->username)->first();
