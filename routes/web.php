@@ -13,7 +13,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('scores', 'UserController@scores');
     $router->post('check', 'UserController@checkIfUsernameExists');
 
-    $router->group(['middleware' => 'auth'], function () use ($router) {
+    $router->group(['middleware' => 'auth:api'], function () use ($router) {
         $router->post('score', 'UserController@score');
     });
 
