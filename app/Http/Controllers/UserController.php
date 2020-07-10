@@ -15,7 +15,6 @@ class UserController extends Controller
     {
 
 
-
         $user = User::where('username', $request->username)->first();
 
         if ($user !== null) {
@@ -63,6 +62,21 @@ class UserController extends Controller
                 ], 400);
             }
 
+        }
+    }
+
+    public function checkIfUsernameExists(Request $request)
+    {
+        $user = User::where('username', $request->username)->first();
+
+        if ($user !== null) {
+            return response()->json([
+                'status' => false
+            ]);
+        } else {
+            return response()->json([
+                'status' => true
+            ]);
         }
     }
 
