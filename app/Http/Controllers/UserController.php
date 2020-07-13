@@ -82,19 +82,13 @@ class UserController extends Controller
 
     public function score(Request $request)
     {
-        dd($request->user('api'));
-        $user = auth()->guard('api')->user();
-        dd($user);
-//        if ($user === null) {
-//            return response()->json([
-//                'message' => 'User Not Found'
-//            ], 404);
-//        }
-//        $user->score = $request->score;
-//        $user->save();
-//        return response()->json([
-//            'score' => $user->score
-//        ]);
+        $user = $request->user();
+
+        $user->score = $request->score;
+        $user->save();
+        return response()->json([
+            'score' => $user->score
+        ]);
 
     }
 

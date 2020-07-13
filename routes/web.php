@@ -4,6 +4,7 @@
 
 
 $router->get('/', function () use ($router) {
+    dd(\App\User::all());
     return $router->app->version();
 });
 
