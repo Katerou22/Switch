@@ -83,20 +83,44 @@ class UserController extends Controller
     public function score(Request $request)
     {
         $user = $request->user();
+        if ($request->score > $user->score) {
+            $user->score = $request->score;
+            $user->save();
+        }
 
-        $user->score = $request->score;
-        $user->save();
         return response()->json([
-            'score' => $user->score
+            'score' => $request->score,
+            'max_score' => $user->score
         ]);
 
     }
 
     public function scores()
     {
-        $users = User::all()->sortByDesc('score');
+        $login = null;
+        if (\request()->user()) {
+            $login = \request()->user();
+        }
+        $i = 0;
+        $users = User::all()->map(function ($user) use ($i, $login) {
+            $current = false;
+            if ($user->id === $login->id) {
+                $current = true;
+            }
+            $i++;
+            return [
+                'id' => $user->id,
+                'username' => $user->username,
+                'score' => $user->score,
+                'rank' => $i,
+                'current' => $current,
+            ];
+        })->sortByDesc('score');
+
+        $current = $users->where('current', true)->first();
         return response()->json([
-            'users' => $users
+            'users' => $users,
+            'current_user' => $current
         ]);
     }
 }
